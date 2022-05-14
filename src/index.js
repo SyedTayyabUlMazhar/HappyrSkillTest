@@ -7,6 +7,13 @@ import { Colors } from './theme';
 
 const Stack = createStackNavigator();
 
+
+const ScreenOptions = {
+  headerShown: false,
+  cardStyle: {
+    backgroundColor: Colors.screenBackground
+  }
+}
 export default App = () =>
 {
   return (

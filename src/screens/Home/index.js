@@ -1,29 +1,49 @@
-import React, { useState, } from 'react';
-import { View, Image, TouchableOpacity, } from 'react-native';
+import React, { useState, useEffect, } from 'react';
+import { View, Image, TouchableOpacity, Text, } from 'react-native';
 import Video from 'react-native-video';
 import styles from './styles';
 import Icons from '../../assets/icons';
 import { Loader } from '../../components';
-
+import RequestUtils from '../../utils/RequestUtils';
 
 export default Home = (props) =>
 {
   const { navigation } = props;
 
-  const [isLoading, setIsloading] = useState(true);
+  const [initialData, setInitialData] = useState();
 
-  const videoUrl = "https://download.samplelib.com/mp4/sample-15s.mp4"
+  const [isLoading, setIsloading] = useState(false);
+
+  const fetchInitialData = async () =>
+  {
+    setIsloading(true);
+    const data = await RequestUtils.getInitialVideoData();
+
+    setInitialData(data);
+    setIsloading(false);
+  };
+
+  useEffect(() =>
+  {
+    fetchInitialData();
+  }, []);
 
   const onReadyForDisplay = () =>
   {
     setIsloading(false);
   };
 
+  const onLoadStart = () =>
+  {
+    setIsloading(true);
+  };
+
   const renderVideo = () =>
   {
     return (
-      <Video source={{ uri: videoUrl }}   // Can be a URL or a local file.
+      <Video source={{ uri: initialData.url }}
         repeat={true}
+        onLoadStart={onLoadStart}
         onReadyForDisplay={onReadyForDisplay}
         resizeMode={"cover"}
         style={styles.video}
@@ -46,12 +66,37 @@ export default Home = (props) =>
         />
       </TouchableOpacity>
     );
+  };
+
+  const renderInfo = () =>
+  {
+    const { title, description, tag, } = initialData;
+
+    return (
+      <View style={styles.infoContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.tag}>{tag}</Text>
+      </View>
+    )
   }
+
+  const renderVideoAndInfo = () => 
+  {
+    if (initialData === undefined)
+      return null;
+    else return (
+      <>
+        {renderVideo()}
+        {renderInfo()}
+      </>
+    );
+  };
 
   return (
     <>
       <View style={styles.container}>
-        {renderVideo()}
+        {renderVideoAndInfo()}
         {renderSearchIcon()}
       </View>
       <Loader isLoading={isLoading} />

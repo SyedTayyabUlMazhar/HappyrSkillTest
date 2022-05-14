@@ -26,5 +26,27 @@ export default StyleSheet.create({
     width: Dimens.screenWidth,
     height: Dimens.screenHeight,
     backgroundColor: Colors.screenBackground,
+  },
+
+  infoContainer: {
+    position: 'absolute',
+    bottom: 32,
+    width: Dimens.screenWidth,
+    padding: 16,
+    backgroundColor: Colors.dim,
+  },
+
+  title: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  description: {
+    fontSize: 16,
+    marginTop: 8
+  },
+
+  tag: {
+    fontSize: 12,
+    marginTop: 8
   }
 });
