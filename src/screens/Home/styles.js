@@ -11,7 +11,7 @@ export default StyleSheet.create({
     top: 16,
     right: 16,
     padding: 16,
-    backgroundColor: Colors.searchIconBackground,
+    backgroundColor: Colors.dim,
     borderRadius: Dimens.borderRadius,
   },
 

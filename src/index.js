@@ -19,7 +19,7 @@ export default App = () =>
   return (
     <NavigationContainer>
 
-      <Stack.Navigator screenOptions={{headerShown:false, cardStyle:{backgroundColor:Colors.screenBackground}}}>
+      <Stack.Navigator screenOptions={ScreenOptions}>
 
         <Stack.Screen
           name="Home"

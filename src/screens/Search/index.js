@@ -5,11 +5,45 @@ import styles from './styles';
 import { withAnchorPoint } from 'react-native-anchor-point';
 import { Dimens } from '../../theme';
 import Item from './Item';
-import mockData from "../../mockData";
+import { Loader } from '../../components';
+import RequestUtils from '../../utils/RequestUtils';
 
-export default Search = () =>
+export default Search = (props) =>
 {
-  const [data, setData] = useState(mockData);
+  const navigation = props.navigation;
+
+  const [data, setData] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const perfomSearch = async (text) =>
+  {
+    setIsLoading(true);
+
+    const response = await RequestUtils.searchVideos(text);
+
+    setData(response);
+    setIsLoading(false);
+  };
+
+
+  useEffect(() =>
+  {
+    // Delay request, to prevent sending requests to often.
+    // if the user changes search text before delay completes,
+    // then the current request will be cancelled and a new request will be sent.
+
+    const timeout = setTimeout(() =>
+    {
+      perfomSearch(searchText);
+    }, 800);
+
+    return () =>
+    {
+      clearTimeout(timeout);
+    }
+  }, [searchText]);
+
 
   const scaleAnim = useRef(new Animated.Value(0)).current;
 
@@ -47,27 +81,49 @@ export default Search = () =>
           style={styles.searchIcon}
           source={Icons.search}
         />
-        <TextInput style={styles.searchInput} />
+        <TextInput
+          style={styles.searchInput}
+          value={searchText}
+          onChangeText={setSearchText}
+        />
       </Animated.View>
     );
   };
 
+  const onPressItem = (itemData) => 
+  {
+    navigation.navigate('Home', { data:itemData });
+  }
+  const renderItem = (listItem) =>
+  {
+    const data = listItem.item;
+    return (
+      <Item
+        onPress={() => onPressItem(data)}
+        data={data}
+      />
+    );
+  }
   const renderList = () => 
   {
     return (
       <FlatList
         data={data}
         contentContainerStyle={styles.contentContainer}
-        renderItem={({ item }) => <Item data={item} />}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <View style={styles.divider} />}
         showsVerticalScrollIndicator={false}
       />
     )
   }
   return (
-    <View style={styles.container}>
-      {renderSearchInput()}
-      {renderList()}
-    </View>
+    <>
+      <View style={styles.container}>
+        {renderSearchInput()}
+        {renderList()}
+      </View>
+      <Loader isLoading={isLoading} />
+    </>
   );
 };

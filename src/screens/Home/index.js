@@ -8,9 +8,11 @@ import RequestUtils from '../../utils/RequestUtils';
 
 export default Home = (props) =>
 {
-  const { navigation } = props;
+  const { navigation, route } = props;
 
   const [initialData, setInitialData] = useState();
+
+  const videoData = route?.params?.data ?? initialData;
 
   const [isLoading, setIsloading] = useState(false);
 
@@ -41,7 +43,7 @@ export default Home = (props) =>
   const renderVideo = () =>
   {
     return (
-      <Video source={{ uri: initialData.url }}
+      <Video source={{ uri: videoData.url }}
         repeat={true}
         onLoadStart={onLoadStart}
         onReadyForDisplay={onReadyForDisplay}
@@ -70,7 +72,7 @@ export default Home = (props) =>
 
   const renderInfo = () =>
   {
-    const { title, description, tag, } = initialData;
+    const { title, description, tag, } = videoData;
 
     return (
       <View style={styles.infoContainer}>
@@ -83,7 +85,7 @@ export default Home = (props) =>
 
   const renderVideoAndInfo = () => 
   {
-    if (initialData === undefined)
+    if (videoData === undefined)
       return null;
     else return (
       <>

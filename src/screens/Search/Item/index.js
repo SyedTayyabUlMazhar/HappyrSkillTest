@@ -5,7 +5,7 @@ import styles from './styles';
 
 export default Item = (props) =>
 {
-  const { data } = props;
+  const { data, onPress, } = props;
   const { thumbnail, title, description, url } = data;
 
   const renderTitleAndDescription = () =>
@@ -18,7 +18,7 @@ export default Item = (props) =>
     )
   }
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={{uri:thumbnail}} style={styles.thumbnail} />
       {renderTitleAndDescription()}
     </TouchableOpacity>
