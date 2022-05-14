@@ -27,4 +27,13 @@ export default StyleSheet.create({
     aspectRatio: 1,
     tintColor: "white",
   },
+
+  contentContainer: {
+    paddingVertical: 20,
+  },
+
+  divider: {
+    backgroundColor: Colors.divider,
+    height: 1,
+  }
 });
