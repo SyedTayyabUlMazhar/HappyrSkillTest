@@ -1,14 +1,25 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-// import styles from './styles';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { Home } from './screens';
 
+const Stack = createStackNavigator();
 
 export default App = () =>
 {
   return (
-    <View style={{flex:1, backgroundColor:'powderblue', justifyContent:'center', alignItems:'center'}}>
-      <Text>Hellow World</Text>
-    </View>
+    <NavigationContainer>
+
+      <Stack.Navigator screenOptions={{headerShown:false}}>
+
+        <Stack.Screen
+          name="Home"
+          component={Home}
+        />
+
+      </Stack.Navigator>
+
+    </NavigationContainer>
   );
 };
