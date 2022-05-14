@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import Colors from '../../theme/colors';
+import { Colors, Dimens, } from '../../theme';
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -10,8 +11,8 @@ export default StyleSheet.create({
     top: 16,
     right: 16,
     padding: 16,
-    backgroundColor: Colors.darkGrey,
-    borderRadius: 12,
+    backgroundColor: Colors.searchIconBackground,
+    borderRadius: Dimens.borderRadius,
   },
 
   searchIcon: {
@@ -19,5 +20,11 @@ export default StyleSheet.create({
     height: undefined,
     aspectRatio: 1,
     tintColor: "white",
+  },
+
+  video: {
+    width: Dimens.screenWidth,
+    height: Dimens.screenHeight,
+    backgroundColor: Colors.screenBackground,
   }
 });
