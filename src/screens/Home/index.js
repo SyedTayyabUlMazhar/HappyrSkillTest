@@ -6,8 +6,10 @@ import Icons from '../../assets/icons';
 import { Loader } from '../../components';
 
 
-export default Home = () =>
+export default Home = (props) =>
 {
+  const { navigation } = props;
+
   const [isLoading, setIsloading] = useState(true);
 
   const videoUrl = "https://download.samplelib.com/mp4/sample-15s.mp4"
@@ -29,10 +31,15 @@ export default Home = () =>
     );
   };
 
+  const onSearchPress = () =>
+  {
+    navigation?.navigate("Search")
+  };
+
   const renderSearchIcon = () =>
   {
     return (
-      <TouchableOpacity style={styles.searchIconContainer}>
+      <TouchableOpacity style={styles.searchIconContainer} onPress={onSearchPress}>
         <Image
           style={styles.searchIcon}
           source={Icons.search}
