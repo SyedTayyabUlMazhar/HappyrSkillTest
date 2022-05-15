@@ -9,7 +9,7 @@ export default StyleSheet.create({
   searchIconContainer: {
     position: 'absolute',
     top: 16,
-    right: 16,
+    right: 20,
     padding: 16,
     backgroundColor: Colors.dim,
     borderRadius: Dimens.borderRadius,

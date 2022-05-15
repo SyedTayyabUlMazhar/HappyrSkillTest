@@ -5,8 +5,12 @@ import Colors from '../../theme/colors';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 32,
+  },
+
+  searchContainerWrapper: {
+    backgroundColor: Colors.screenBackground,
     paddingHorizontal: 20,
+    paddingTop: 16,
   },
 
   searchInputContainer: {
@@ -29,7 +33,9 @@ export default StyleSheet.create({
   },
 
   contentContainer: {
-    paddingVertical: 20,
+    flexGrow: 1,
+    padding: 20,
+    backgroundColor: Colors.screenBackground,
   },
 
   divider: {

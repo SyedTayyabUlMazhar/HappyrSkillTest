@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home, Search } from './screens';
 import { Colors } from './theme';
@@ -13,7 +13,14 @@ const ScreenOptions = {
   cardStyle: {
     backgroundColor: Colors.screenBackground
   }
-}
+};
+
+const searchScreenOptions = {
+  ...TransitionPresets.ModalFadeTransition,
+  presentation: 'transparentModal',
+  cardStyle:{},
+};
+
 export default App = () =>
 {
   return (
@@ -28,6 +35,7 @@ export default App = () =>
         <Stack.Screen
           name="Search"
           component={Search}
+          options={searchScreenOptions}
         />
 
       </Stack.Navigator>

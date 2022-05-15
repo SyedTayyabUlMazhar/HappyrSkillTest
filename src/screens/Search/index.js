@@ -45,7 +45,8 @@ export default Search = (props) =>
   }, [searchText]);
 
 
-  const scaleAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0
+  )).current;
 
   useEffect(() =>
   {
@@ -76,23 +77,25 @@ export default Search = (props) =>
     ];
 
     return (
-      <Animated.View style={searchInputContainerStyle}>
-        <Image
-          style={styles.searchIcon}
-          source={Icons.search}
-        />
-        <TextInput
-          style={styles.searchInput}
-          value={searchText}
-          onChangeText={setSearchText}
-        />
-      </Animated.View>
+      <View style={styles.searchContainerWrapper}>
+        <Animated.View style={searchInputContainerStyle}>
+          <Image
+            style={styles.searchIcon}
+            source={Icons.search}
+          />
+          <TextInput
+            style={styles.searchInput}
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+        </Animated.View>
+      </View>
     );
   };
 
   const onPressItem = (itemData) => 
   {
-    navigation.navigate('Home', { data:itemData });
+    navigation.navigate('Home', { data: itemData });
   }
   const renderItem = (listItem) =>
   {
